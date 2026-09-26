@@ -1,0 +1,42 @@
+# Scientific Articles Engine Configuration
+
+# LLM Service Configuration
+llm:
+  provider: "openai"  # Options: openai, anthropic
+  model: "gpt-4"      # For OpenAI: gpt-4, gpt-3.5-turbo; For Anthropic: claude-3-opus-20240229
+  temperature: 0.7
+  max_tokens: 4000
+
+# Agent-Specific Configuration
+agents:
+  # Searcher Agent
+  max_papers_per_source: 10
+  search_timeout: 30
+  num_retries: 3
+  delay_seconds: 3.0
+
+  # Writer Agent
+  min_word_count: 1000
+  max_word_count: 5000
+  style_guide: "academic"
+
+  # Reviewer Agent
+  quality_threshold: 7.0
+  max_revisions: 3
+
+  # Visualizer Agent
+  max_visualizations: 5
+  supported_types:
+    - "table"
+    - "diagram"
+    - "flowchart"
+    - "timeline"
+
+# Database Configuration (for LangGraph checkpointing)
+database:
+  enabled: true
+  host: "localhost"
+  port: 5433
+  database: "scientific_articles_engine"
+  user: "postgres"
+  # password is loaded from DATABASE_PASSWORD environment variable
