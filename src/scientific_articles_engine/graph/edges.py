@@ -1,6 +1,6 @@
 """Conditional edge functions for routing in the LangGraph workflow."""
 
-from typing import Literal
+from typing import Dict, Literal
 
 from ..core.state import AgentState
 from ..utils.logger import get_logger
@@ -47,6 +47,7 @@ def route_after_human_sources(
 
 def route_after_reviewer(
     state: AgentState,
+    max_revisions: int = 3,
 ) -> Literal["writer", "human_review_final", "__end__"]:
     """Route after Reviewer node.
 
@@ -54,6 +55,7 @@ def route_after_reviewer(
 
     Args:
         state: Current workflow state
+        max_revisions: Maximum revision attempts, from config.agents.max_revisions
 
     Returns:
         Next node name:
@@ -61,7 +63,6 @@ def route_after_reviewer(
         - "human_review_final": If quality passed
         - "__end__": If max revisions exceeded
     """
-    max_revisions = 3  # This should come from config, but hardcoded for now
     revision_count = state.get("revision_count", 0)
 
     if state.get("error_message"):
@@ -105,16 +106,16 @@ def route_after_human_final(
         return "__end__"
 
 
-def increment_revision_count(state: AgentState) -> AgentState:
+def increment_revision_count(state: AgentState) -> Dict:
     """Increment revision count before routing back to writer.
 
-    This is called as a transform on the edge from reviewer to writer.
+    Registered as a graph node between reviewer and writer so the
+    revision limit checked in route_after_reviewer is actually enforced.
 
     Args:
         state: Current workflow state
 
     Returns:
-        Updated state with incremented revision count
+        State update with incremented revision count
     """
-    state["revision_count"] = state.get("revision_count", 0) + 1
-    return state
+    return {"revision_count": state.get("revision_count", 0) + 1}

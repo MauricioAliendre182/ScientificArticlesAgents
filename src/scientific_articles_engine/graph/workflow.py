@@ -20,6 +20,7 @@ from ..services import AgentFactory
 from ..utils.logger import get_logger
 from .checkpoints import get_async_checkpointer_from_config, get_checkpointer_from_config
 from .edges import (
+    increment_revision_count,
     route_after_human_final,
     route_after_human_sources,
     route_after_reviewer,
@@ -65,6 +66,7 @@ def create_workflow(config: EngineConfig, checkpointer=None) -> StateGraph:
     workflow.add_node("human_review_sources", human_review_sources_node)
     workflow.add_node("writer", partial(writer_node, writer_agent=writer))
     workflow.add_node("reviewer", partial(reviewer_node, reviewer_agent=reviewer))
+    workflow.add_node("increment_revision", increment_revision_count)
     workflow.add_node("human_review_final", human_review_final_node)
     workflow.add_node("visualizer", partial(visualizer_node, visualizer_agent=visualizer))
 
@@ -98,13 +100,16 @@ def create_workflow(config: EngineConfig, checkpointer=None) -> StateGraph:
     # Reviewer → Writer (revision) or Human Review (passed) or END (max revisions)
     workflow.add_conditional_edges(
         "reviewer",
-        route_after_reviewer,
+        partial(route_after_reviewer, max_revisions=config.agents.max_revisions),
         {
-            "writer": "writer",
+            "writer": "increment_revision",
             "human_review_final": "human_review_final",
             "__end__": END,
         },
     )
+
+    # Increment revision count → Writer (closes the feedback loop)
+    workflow.add_edge("increment_revision", "writer")
 
     # Human Review Final → Visualizer or END
     workflow.add_conditional_edges(
