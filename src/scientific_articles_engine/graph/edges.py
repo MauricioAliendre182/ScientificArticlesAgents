@@ -1,6 +1,6 @@
 """Conditional edge functions for routing in the LangGraph workflow."""
 
-from typing import Dict, Literal
+from typing import Literal
 
 from ..core.state import AgentState
 from ..utils.logger import get_logger
@@ -106,7 +106,7 @@ def route_after_human_final(
         return "__end__"
 
 
-def increment_revision_count(state: AgentState) -> Dict:
+def increment_revision_count(state: AgentState) -> dict:
     """Increment revision count before routing back to writer.
 
     Registered as a graph node between reviewer and writer so the

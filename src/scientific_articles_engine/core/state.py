@@ -3,7 +3,7 @@
 This module defines the shared state that flows through the multi-agent workflow.
 """
 
-from typing import Annotated, Dict, List, Optional
+from typing import Annotated
 
 from langchain_core.messages import BaseMessage
 from langgraph.graph.message import add_messages
@@ -38,11 +38,11 @@ class AgentState(TypedDict):
 
     # Core data
     topic: str
-    papers: List[Paper]
-    outline: Optional[str]
-    article: Optional[Article]
-    review: Optional[ReviewResult]
-    visualizations: List[Visualization]
+    papers: list[Paper]
+    outline: str | None
+    article: Article | None
+    review: ReviewResult | None
+    visualizations: list[Visualization]
 
     # Workflow control
     revision_count: int
@@ -51,13 +51,13 @@ class AgentState(TypedDict):
     final_approved: bool
 
     # Error handling
-    error_message: Optional[str]
+    error_message: str | None
 
     # LangGraph message history (using add_messages reducer)
     # Annotated: This field uses the add_messages reducer to maintain the conversation history.
     # List[BaseMessage]: Maintains the conversation history for LangGraph agents
     # add_messages: Reducer function to update the message history
-    messages: Annotated[List[BaseMessage], add_messages]
+    messages: Annotated[list[BaseMessage], add_messages]
 
 
 def create_initial_state(topic: str) -> AgentState:

@@ -1,7 +1,6 @@
 """arXiv API service for searching academic papers."""
 
-from datetime import datetime
-from typing import Any, Dict, List
+from typing import Any
 
 import arxiv
 
@@ -20,7 +19,7 @@ class ArxivService(BaseService, PaperSearchServiceProtocol):
         max_results: Maximum results to return per search
     """
 
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         """Initialize the arXiv service.
 
         Args:
@@ -45,7 +44,7 @@ class ArxivService(BaseService, PaperSearchServiceProtocol):
         )
         self.logger.info(f"Initialized arXiv service (max_results={self.max_results})")
 
-    async def search(self, query: str, max_results: int = 10) -> List[Paper]:
+    async def search(self, query: str, max_results: int = 10) -> list[Paper]:
         """Search for papers on arXiv.
 
         Args:

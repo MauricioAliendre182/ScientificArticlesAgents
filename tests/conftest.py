@@ -1,12 +1,19 @@
 """Pytest configuration and fixtures for testing."""
 
-import pytest
 from unittest.mock import AsyncMock, MagicMock
 
-from src.scientific_articles_engine.config import AgentConfig, DatabaseConfig, EngineConfig, LLMConfig
+import pytest
+
+from src.scientific_articles_engine.config import (
+    AgentConfig,
+    DatabaseConfig,
+    EngineConfig,
+    LLMConfig,
+)
 from src.scientific_articles_engine.models.article import Article, ArticleSection
 from src.scientific_articles_engine.models.paper import Paper, PaperAuthor
 from src.scientific_articles_engine.models.review import ReviewCriteria, ReviewResult
+
 
 @pytest.fixture
 def test_config():

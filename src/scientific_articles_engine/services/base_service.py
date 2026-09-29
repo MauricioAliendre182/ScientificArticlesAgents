@@ -1,10 +1,11 @@
 """Base service class for all external service integrations."""
 
 from abc import ABC
-from typing import Any, Dict
+from typing import Any
 
 from ..core.exceptions import ServiceException
 from ..utils.logger import get_logger
+
 
 # ABC is to define an abstract base class that cannot be instantiated directly and is meant to be subclassed by concrete service implementations.
 class BaseService(ABC):
@@ -18,7 +19,7 @@ class BaseService(ABC):
         logger: Logger instance for this service
     """
 
-    def __init__(self, service_name: str, config: Dict[str, Any]):
+    def __init__(self, service_name: str, config: dict[str, Any]):
         """Initialize the service.
 
         Args:

@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 import yaml
 from dotenv import load_dotenv
@@ -29,7 +29,7 @@ class LLMConfig(BaseModel):
     model: str = Field(..., description="Model name")
     temperature: float = Field(0.7, ge=0.0, le=1.0, description="Sampling temperature")
     max_tokens: int = Field(4000, gt=0, description="Maximum tokens to generate")
-    api_key: Optional[str] = Field(None, description="API key (from env)")
+    api_key: str | None = Field(None, description="API key (from env)")
 
 
 class AgentConfig(BaseModel):
@@ -83,7 +83,7 @@ class DatabaseConfig(BaseModel):
     port: int = Field(5432, gt=0, lt=65536)
     database: str = Field("scientific_articles_engine")
     user: str = Field("postgres")
-    password: Optional[str] = Field(None, description="Password (from env)")
+    password: str | None = Field(None, description="Password (from env)")
     enabled: bool = Field(True)
 
 
@@ -118,7 +118,7 @@ class EngineConfig(BaseModel):
             raise ConfigurationException(f"Configuration file not found: {config_path}")
 
         try:
-            with open(path, "r") as f:
+            with open(path) as f:
                 config_data = yaml.safe_load(f)
         except Exception as e:
             raise ConfigurationException(
@@ -134,7 +134,7 @@ class EngineConfig(BaseModel):
             raise ConfigurationException(f"Invalid configuration: {e}")
 
     @staticmethod
-    def _inject_env_vars(config_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _inject_env_vars(config_data: dict[str, Any]) -> dict[str, Any]:
         """Inject environment variables into configuration.
 
         Args:
@@ -157,7 +157,7 @@ class EngineConfig(BaseModel):
 
         return config_data
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert configuration to dictionary.
 
         Returns:
@@ -166,7 +166,7 @@ class EngineConfig(BaseModel):
         return self.model_dump()
 
 
-def load_config(config_path: Optional[str] = None) -> EngineConfig:
+def load_config(config_path: str | None = None) -> EngineConfig:
     """Load configuration from file or use default path.
 
     Args:

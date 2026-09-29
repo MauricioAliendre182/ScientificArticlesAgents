@@ -10,7 +10,7 @@ Workflow structure:
 """
 
 from functools import partial
-from typing import Any, Dict
+from typing import Any
 
 from langgraph.graph import END, START, StateGraph
 
@@ -170,8 +170,8 @@ def create_workflow_for_testing() -> StateGraph:
 async def run_workflow_with_hitl(
     workflow: StateGraph,
     topic: str,
-    config_dict: Dict[str, Any],
-) -> Dict:
+    config_dict: dict[str, Any],
+) -> dict:
     """Run the workflow with Human-in-the-Loop interactions.
 
     This is a helper function demonstrating HITL workflow execution.

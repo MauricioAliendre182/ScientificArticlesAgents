@@ -3,7 +3,6 @@
 Each node function wraps an agent execution and updates the state.
 """
 
-from typing import Dict
 
 from ..agents.reviewer_agent import ReviewerAgent
 from ..agents.searcher_agent import SearcherAgent
@@ -17,7 +16,7 @@ logger = get_logger(__name__)
 
 async def searcher_node(
     state: AgentState, searcher_agent: SearcherAgent
-) -> Dict:
+) -> dict:
     """Execute the Searcher agent node.
 
     Args:
@@ -44,7 +43,7 @@ async def searcher_node(
 
 async def writer_node(
     state: AgentState, writer_agent: WriterAgent
-) -> Dict:
+) -> dict:
     """Execute the Writer agent node.
 
     Args:
@@ -72,7 +71,7 @@ async def writer_node(
 
 async def reviewer_node(
     state: AgentState, reviewer_agent: ReviewerAgent
-) -> Dict:
+) -> dict:
     """Execute the Reviewer agent node.
 
     Args:
@@ -103,7 +102,7 @@ async def reviewer_node(
 
 async def visualizer_node(
     state: AgentState, visualizer_agent: VisualizerAgent
-) -> Dict:
+) -> dict:
     """Execute the Visualizer agent node.
 
     Args:
@@ -127,7 +126,7 @@ async def visualizer_node(
         return {"error_message": str(e)}
 
 
-def human_review_sources_node(state: AgentState) -> Dict:
+def human_review_sources_node(state: AgentState) -> dict:
     """Human-in-the-loop node for reviewing sources and outline.
 
     This is an interruption point. The workflow will pause here
@@ -149,7 +148,7 @@ def human_review_sources_node(state: AgentState) -> Dict:
     return {}
 
 
-def human_review_final_node(state: AgentState) -> Dict:
+def human_review_final_node(state: AgentState) -> dict:
     """Human-in-the-loop node for reviewing final article.
 
     This is an interruption point. The workflow will pause here

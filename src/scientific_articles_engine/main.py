@@ -3,11 +3,9 @@
 import asyncio
 import sys
 from pathlib import Path
-from typing import Optional
 
 import click
 from rich.console import Console
-from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
@@ -51,7 +49,7 @@ def cli(ctx: click.Context, config: str, log_level: str) -> None:
 def generate(
     ctx: click.Context,
     topic: str,
-    output: Optional[str],
+    output: str | None,
     thread_id: str,
     auto_approve: bool,
 ) -> None:
@@ -70,7 +68,7 @@ def generate(
 async def _generate_article(
     ctx: click.Context,
     topic: str,
-    output: Optional[str],
+    output: str | None,
     thread_id: str,
     auto_approve: bool,
 ) -> None:
@@ -208,7 +206,7 @@ async def _generate_article(
         output_path = output or f"{topic.replace(' ', '_')}.md"
         _save_article(state["article"], state["visualizations"], Path(output_path))
 
-        console.print(f"\n[bold green]✓ Article generated successfully![/bold green]")
+        console.print("\n[bold green]✓ Article generated successfully![/bold green]")
         console.print(f"Output: {output_path}")
         console.print(f"Visualizations: {len(state['visualizations'])}")
 

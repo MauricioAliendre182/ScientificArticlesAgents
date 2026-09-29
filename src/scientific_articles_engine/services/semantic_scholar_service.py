@@ -2,7 +2,7 @@
 
 import os
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from semanticscholar import SemanticScholar
 
@@ -21,7 +21,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
         max_results: Maximum results to return per search
     """
 
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         """Initialize the Semantic Scholar service.
 
         Args:
@@ -46,7 +46,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
             f"Initialized Semantic Scholar service (max_results={self.max_results})"
         )
 
-    async def search(self, query: str, max_results: int = 10) -> List[Paper]:
+    async def search(self, query: str, max_results: int = 10) -> list[Paper]:
         """Search for papers on Semantic Scholar.
 
         Args:
@@ -90,7 +90,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
         """
         return "semantic_scholar"
 
-    def _convert_to_paper(self, result: Any) -> Optional[Paper]:
+    def _convert_to_paper(self, result: Any) -> Paper | None:
         """Convert Semantic Scholar result to Paper model.
 
         Args:

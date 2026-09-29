@@ -1,7 +1,6 @@
 """Pydantic models for academic papers."""
 
 from datetime import datetime
-from typing import List, Optional
 
 from pydantic import BaseModel, Field, HttpUrl
 
@@ -15,7 +14,7 @@ class PaperAuthor(BaseModel):
     """
 
     name: str = Field(..., description="Author's full name")
-    affiliation: Optional[str] = Field(None, description="Author's affiliation")
+    affiliation: str | None = Field(None, description="Author's affiliation")
 
 
 class Paper(BaseModel):
@@ -37,15 +36,15 @@ class Paper(BaseModel):
     """
 
     title: str = Field(..., description="Title of the paper")
-    authors: List[PaperAuthor] = Field(default_factory=list, description="List of authors")
+    authors: list[PaperAuthor] = Field(default_factory=list, description="List of authors")
     abstract: str = Field(..., description="Paper abstract")
     url: HttpUrl = Field(..., description="URL to the paper")
-    pdf_url: Optional[HttpUrl] = Field(None, description="Direct PDF URL")
-    published_date: Optional[datetime] = Field(None, description="Publication date")
+    pdf_url: HttpUrl | None = Field(None, description="Direct PDF URL")
+    published_date: datetime | None = Field(None, description="Publication date")
     source: str = Field(..., description="Source database (arxiv, semantic_scholar)")
     paper_id: str = Field(..., description="Unique ID from source")
-    citations_count: Optional[int] = Field(None, description="Number of citations")
-    venue: Optional[str] = Field(None, description="Publication venue")
+    citations_count: int | None = Field(None, description="Number of citations")
+    venue: str | None = Field(None, description="Publication venue")
 
     # Define Config class for Pydantic model settings
     # It is to provide additional configuration for the Pydantic model, such as example data for JSON schema.

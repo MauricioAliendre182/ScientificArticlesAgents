@@ -1,6 +1,6 @@
 """Visualizer agent for generating diagrams and tables."""
 
-from typing import Any, Dict, List
+from typing import Any
 
 from ..core.agent_base import BaseAgent
 from ..core.protocols import LLMServiceProtocol
@@ -9,7 +9,7 @@ from ..models.article import Article
 from ..models.visualization import Visualization, VisualizationType
 
 
-class VisualizerAgent(BaseAgent[List[Visualization]]):
+class VisualizerAgent(BaseAgent[list[Visualization]]):
     """Agent responsible for generating visualizations for articles.
 
     This agent:
@@ -27,7 +27,7 @@ class VisualizerAgent(BaseAgent[List[Visualization]]):
     def __init__(
         self,
         llm_service: LLMServiceProtocol,
-        config: Dict[str, Any],
+        config: dict[str, Any],
     ):
         """Initialize the Visualizer agent.
 
@@ -39,7 +39,7 @@ class VisualizerAgent(BaseAgent[List[Visualization]]):
         """
         super().__init__(llm_service, config, agent_name="VisualizerAgent")
 
-    async def execute(self, state: AgentState) -> List[Visualization]:
+    async def execute(self, state: AgentState) -> list[Visualization]:
         """Execute the visualizer agent's task.
 
         Args:
@@ -69,7 +69,7 @@ class VisualizerAgent(BaseAgent[List[Visualization]]):
 
     async def _generate_visualizations(
         self, article: Article, topic: str
-    ) -> List[Visualization]:
+    ) -> list[Visualization]:
         """Generate visualizations for an article.
 
         Args:
@@ -101,7 +101,7 @@ class VisualizerAgent(BaseAgent[List[Visualization]]):
         return visualizations
 
     async def _generate_single_visualization(
-        self, opportunity: Dict[str, str], article_text: str, index: int
+        self, opportunity: dict[str, str], article_text: str, index: int
     ) -> Visualization:
         """Generate a single visualization.
 
@@ -140,7 +140,7 @@ class VisualizerAgent(BaseAgent[List[Visualization]]):
             description=description,
         )
 
-    def _parse_opportunities(self, opportunities_text: str) -> List[Dict[str, str]]:
+    def _parse_opportunities(self, opportunities_text: str) -> list[dict[str, str]]:
         """Parse visualization opportunities from LLM response.
 
         Args:

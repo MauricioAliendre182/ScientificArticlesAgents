@@ -1,6 +1,6 @@
 """Writer agent for drafting and revising articles."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from ..core.agent_base import BaseAgent
 from ..core.protocols import LLMServiceProtocol
@@ -25,7 +25,7 @@ class WriterAgent(BaseAgent[Article]):
     def __init__(
         self,
         llm_service: LLMServiceProtocol,
-        config: Dict[str, Any],
+        config: dict[str, Any],
     ):
         """Initialize the Writer agent.
 
@@ -79,7 +79,7 @@ class WriterAgent(BaseAgent[Article]):
             return None  # For type checking
 
     async def _create_draft(
-        self, topic: str, outline: str, papers: List[Paper]
+        self, topic: str, outline: str, papers: list[Paper]
     ) -> Article:
         """Create a new article draft.
 
@@ -104,7 +104,7 @@ class WriterAgent(BaseAgent[Article]):
         return article
 
     async def _revise_article(
-        self, article: Article, review: ReviewResult, papers: List[Paper]
+        self, article: Article, review: ReviewResult, papers: list[Paper]
     ) -> Article:
         """Revise an existing article based on feedback.
 
@@ -137,7 +137,7 @@ class WriterAgent(BaseAgent[Article]):
 
         return revised_article
 
-    def _build_papers_context(self, papers: List[Paper]) -> str:
+    def _build_papers_context(self, papers: list[Paper]) -> str:
         """Build context string from papers.
 
         Args:
@@ -232,9 +232,9 @@ class WriterAgent(BaseAgent[Article]):
     def _parse_article(
         self,
         article_text: str,
-        papers: List[Paper],
+        papers: list[Paper],
         version: int = 1,
-        revision_notes: Optional[str] = None,
+        revision_notes: str | None = None,
     ) -> Article:
         """Parse generated article text into structured Article object.
 
@@ -288,7 +288,7 @@ class WriterAgent(BaseAgent[Article]):
             revision_notes=revision_notes,
         )
 
-    def _parse_sections(self, article_text: str) -> List[ArticleSection]:
+    def _parse_sections(self, article_text: str) -> list[ArticleSection]:
         """Parse article text into sections.
 
         Args:

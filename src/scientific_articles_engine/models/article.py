@@ -1,6 +1,5 @@
 """Pydantic models for generated articles."""
 
-from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -16,7 +15,7 @@ class ArticleSection(BaseModel):
 
     title: str = Field(..., description="Section title/heading")
     content: str = Field(..., description="Section text content")
-    subsections: List["ArticleSection"] = Field(
+    subsections: list["ArticleSection"] = Field(
         default_factory=list, description="Nested subsections"
     )
 
@@ -39,11 +38,11 @@ class Article(BaseModel):
 
     title: str = Field(..., description="Article title")
     abstract: str = Field(..., description="Article abstract")
-    sections: List[ArticleSection] = Field(..., description="Article sections")
-    references: List[str] = Field(default_factory=list, description="List of references")
+    sections: list[ArticleSection] = Field(..., description="Article sections")
+    references: list[str] = Field(default_factory=list, description="List of references")
     word_count: int = Field(..., description="Total word count")
     version: int = Field(default=1, description="Version number")
-    revision_notes: Optional[str] = Field(None, description="Revision notes")
+    revision_notes: str | None = Field(None, description="Revision notes")
 
     class Config:
         """Pydantic model configuration."""

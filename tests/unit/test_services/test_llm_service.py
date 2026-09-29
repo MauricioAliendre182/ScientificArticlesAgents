@@ -1,7 +1,8 @@
 """Unit tests for LLMService."""
 
-import pytest
 from unittest.mock import AsyncMock, patch
+
+import pytest
 
 from src.scientific_articles_engine.services.llm_service import LLMService
 

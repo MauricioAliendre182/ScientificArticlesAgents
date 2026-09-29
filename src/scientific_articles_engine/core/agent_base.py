@@ -5,12 +5,12 @@ interface for all agents (Liskov Substitution Principle - LSP).
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Generic, TypeVar
+from typing import Any, Generic, TypeVar
 
+from ..utils.logger import get_logger
 from .exceptions import AgentExecutionException
 from .protocols import LLMServiceProtocol
 from .state import AgentState
-from ..utils.logger import get_logger
 
 T = TypeVar("T")
 
@@ -32,7 +32,7 @@ class BaseAgent(ABC, Generic[T]):
     def __init__(
         self,
         llm_service: LLMServiceProtocol,
-        config: Dict[str, Any],
+        config: dict[str, Any],
         agent_name: str = "BaseAgent",
     ):
         """Initialize the agent with dependencies.

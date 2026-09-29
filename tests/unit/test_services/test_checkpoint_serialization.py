@@ -1,6 +1,7 @@
 """Tests for serializing application models in LangGraph checkpoints."""
 
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+
 from src.scientific_articles_engine.graph.checkpoints import checkpoint_serializer
 from src.scientific_articles_engine.models.visualization import (
     Visualization,

@@ -1,7 +1,7 @@
 """LLM service for text generation using LangChain abstractions."""
 
 import json
-from typing import Any, Dict, Optional
+from typing import Any
 
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -24,7 +24,7 @@ class LLMService(BaseService, LLMServiceProtocol):
         llm: LangChain ChatModel instance
     """
 
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: dict[str, Any]):
         """Initialize the LLM service.
 
         Args:
@@ -76,7 +76,7 @@ class LLMService(BaseService, LLMServiceProtocol):
         except Exception as e:
             self._handle_error(e, "Failed to initialize LLM")
 
-    async def generate(self, prompt: str, **kwargs: Dict) -> str:
+    async def generate(self, prompt: str, **kwargs: dict) -> str:
         """Generate text completion from a prompt.
 
         Args:
@@ -98,8 +98,8 @@ class LLMService(BaseService, LLMServiceProtocol):
             return ""  # For type checking; exception is always raised
 
     async def generate_with_structure(
-        self, prompt: str, schema: Dict, **kwargs: Dict
-    ) -> Dict:
+        self, prompt: str, schema: dict, **kwargs: dict
+    ) -> dict:
         """Generate structured output conforming to a schema.
 
         Uses function calling / structured output features of the LLM.
@@ -145,7 +145,7 @@ Return ONLY the JSON object, no additional text."""
             return {}  # For type checking
 
     async def generate_with_system_message(
-        self, system: str, prompt: str, **kwargs: Dict
+        self, system: str, prompt: str, **kwargs: dict
     ) -> str:
         """Generate text with a system message.
 

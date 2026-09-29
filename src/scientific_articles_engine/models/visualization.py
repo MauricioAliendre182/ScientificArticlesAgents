@@ -1,7 +1,6 @@
 """Pydantic models for visualizations."""
 
 from enum import Enum
-from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -41,7 +40,7 @@ class Visualization(BaseModel):
     format: str = Field(
         ..., description="Content format (markdown, mermaid, latex, dot, etc.)"
     )
-    description: Optional[str] = Field(
+    description: str | None = Field(
         None, description="Description of the visualization"
     )
 

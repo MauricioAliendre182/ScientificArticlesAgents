@@ -4,11 +4,10 @@ Supports both PostgreSQL (production) and in-memory (testing) checkpointing.
 """
 
 import os
-from typing import Optional
 
 from langgraph.checkpoint.memory import MemorySaver
-from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from langgraph.checkpoint.postgres import PostgresSaver
+from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from psycopg import AsyncConnection, Connection
 from psycopg.rows import dict_row
@@ -20,7 +19,7 @@ logger = get_logger(__name__)
 # It uses JsonPlusSerializer with pickle fallback enabled.
 # pickle fallback: it is to ensure that objects not natively supported by JsonPlus can still be serialized using Python's pickle mechanism.
 # For postgresql checkpointing, this serializer will be used to serialize and deserialize the checkpoint data.
-# IMPORTANT: pickle fallback is appropriate only while the checkpoint database contains trusted data. 
+# IMPORTANT: pickle fallback is appropriate only while the checkpoint database contains trusted data.
 # Don’t load checkpoints that an untrusted party could modify.
 checkpoint_serializer = JsonPlusSerializer(
     pickle_fallback=True,
@@ -39,7 +38,7 @@ checkpoint_serializer = JsonPlusSerializer(
 
 def create_checkpointer(
     use_postgres: bool = True,
-    connection_string: Optional[str] = None,
+    connection_string: str | None = None,
 ) -> PostgresSaver | MemorySaver:
     """Create a checkpointer for LangGraph state persistence.
 
@@ -80,7 +79,7 @@ def create_checkpointer(
         return MemorySaver()
 
 
-def _build_connection_string_from_env() -> Optional[str]:
+def _build_connection_string_from_env() -> str | None:
     """Build PostgreSQL connection string from environment variables.
 
     Expected environment variables:

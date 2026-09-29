@@ -1,6 +1,6 @@
 """Reviewer agent for evaluating article quality."""
 
-from typing import Any, Dict
+from typing import Any
 
 from ..core.agent_base import BaseAgent
 from ..core.protocols import LLMServiceProtocol
@@ -28,7 +28,7 @@ class ReviewerAgent(BaseAgent[ReviewResult]):
     def __init__(
         self,
         llm_service: LLMServiceProtocol,
-        config: Dict[str, Any],
+        config: dict[str, Any],
     ):
         """Initialize the Reviewer agent.
 

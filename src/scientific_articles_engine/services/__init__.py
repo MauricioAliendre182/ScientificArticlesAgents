@@ -131,7 +131,7 @@ class AgentFactory:
             config=self._get_visualizer_config(),
         )
 
-    def _get_searcher_config(self) -> Dict[str, Any]:
+    def _get_searcher_config(self) -> dict[str, Any]:
         """Get configuration for Searcher agent.
 
         Returns:
@@ -142,7 +142,7 @@ class AgentFactory:
             "search_timeout": self.config.agents.search_timeout,
         }
 
-    def _get_writer_config(self) -> Dict[str, Any]:
+    def _get_writer_config(self) -> dict[str, Any]:
         """Get configuration for Writer agent.
 
         Returns:
@@ -154,7 +154,7 @@ class AgentFactory:
             "style_guide": self.config.agents.style_guide,
         }
 
-    def _get_reviewer_config(self) -> Dict[str, Any]:
+    def _get_reviewer_config(self) -> dict[str, Any]:
         """Get configuration for Reviewer agent.
 
         Returns:
@@ -165,7 +165,7 @@ class AgentFactory:
             "max_revisions": self.config.agents.max_revisions,
         }
 
-    def _get_visualizer_config(self) -> Dict[str, Any]:
+    def _get_visualizer_config(self) -> dict[str, Any]:
         """Get configuration for Visualizer agent.
 
         Returns:

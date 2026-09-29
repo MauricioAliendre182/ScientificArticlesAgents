@@ -3,8 +3,9 @@
 These tests require actual API keys and should be run sparingly.
 """
 
-import pytest
 import os
+
+import pytest
 
 
 @pytest.mark.e2e

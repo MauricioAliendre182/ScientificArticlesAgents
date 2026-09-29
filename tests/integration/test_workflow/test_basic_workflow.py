@@ -1,11 +1,16 @@
 """Integration tests for the complete workflow."""
 
-import pytest
-from unittest.mock import AsyncMock, patch
+from unittest.mock import patch
 
-from src.scientific_articles_engine.config import AgentConfig, DatabaseConfig, EngineConfig, LLMConfig
+import pytest
+
+from src.scientific_articles_engine.config import (
+    AgentConfig,
+    DatabaseConfig,
+    EngineConfig,
+    LLMConfig,
+)
 from src.scientific_articles_engine.graph.workflow import create_workflow
-from src.scientific_articles_engine.core.state import create_initial_state
 
 
 @pytest.mark.asyncio

@@ -1,7 +1,7 @@
 """Searcher agent for finding and curating academic papers."""
 
 import asyncio
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 from ..core.agent_base import BaseAgent
 from ..core.protocols import LLMServiceProtocol, PaperSearchServiceProtocol
@@ -10,7 +10,7 @@ from ..models.paper import Paper
 from ..services.paper_cache_service import PaperCacheService
 
 
-class SearcherAgent(BaseAgent[Tuple[List[Paper], str]]):
+class SearcherAgent(BaseAgent[tuple[list[Paper], str]]):
     """Agent responsible for searching papers and generating an outline.
 
     This agent:
@@ -27,7 +27,7 @@ class SearcherAgent(BaseAgent[Tuple[List[Paper], str]]):
         llm_service: LLMServiceProtocol,
         arxiv_service: PaperSearchServiceProtocol,
         semantic_scholar_service: PaperSearchServiceProtocol,
-        config: Dict[str, Any],
+        config: dict[str, Any],
         paper_cache: PaperCacheService | None = None,
     ):
         """Initialize the Searcher agent.
@@ -43,7 +43,7 @@ class SearcherAgent(BaseAgent[Tuple[List[Paper], str]]):
         self.semantic_scholar_service = semantic_scholar_service
         self.paper_cache = paper_cache
 
-    async def execute(self, state: AgentState) -> Tuple[List[Paper], str]:
+    async def execute(self, state: AgentState) -> tuple[list[Paper], str]:
         """Execute the searcher agent's task.
 
         Args:
@@ -84,7 +84,7 @@ class SearcherAgent(BaseAgent[Tuple[List[Paper], str]]):
 
     async def _search_all_sources(
         self, query: str
-    ) -> Tuple[List[Paper], List[Paper]]:
+    ) -> tuple[list[Paper], list[Paper]]:
         """Search all paper sources in parallel.
 
         Args:
@@ -164,7 +164,7 @@ class SearcherAgent(BaseAgent[Tuple[List[Paper], str]]):
 
         return combined_papers, []
 
-    def _deduplicate_papers(self, papers: List[Paper]) -> List[Paper]:
+    def _deduplicate_papers(self, papers: list[Paper]) -> list[Paper]:
         """Deduplicate papers by title similarity.
 
         Args:
@@ -186,7 +186,7 @@ class SearcherAgent(BaseAgent[Tuple[List[Paper], str]]):
 
         return unique_papers
 
-    async def _generate_outline(self, topic: str, papers: List[Paper]) -> str:
+    async def _generate_outline(self, topic: str, papers: list[Paper]) -> str:
         """Generate article outline using LLM.
 
         Args:
