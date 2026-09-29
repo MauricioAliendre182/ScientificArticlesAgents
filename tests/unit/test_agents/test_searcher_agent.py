@@ -20,12 +20,8 @@ async def test_searcher_continues_when_one_source_fails(
     arxiv_service = mock_arxiv_service
     semantic_scholar_service = mock_semantic_scholar_service
 
-    failed_service = (
-        arxiv_service if failed_source == "arxiv" else semantic_scholar_service
-    )
-    successful_service = (
-        semantic_scholar_service if failed_source == "arxiv" else arxiv_service
-    )
+    failed_service = arxiv_service if failed_source == "arxiv" else semantic_scholar_service
+    successful_service = semantic_scholar_service if failed_source == "arxiv" else arxiv_service
     failed_service.search.side_effect = ConnectionError("service unavailable")
     successful_service.search.return_value = sample_papers
 

@@ -42,9 +42,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
             api_key=api_key,
             retry=retry,
         )
-        self.logger.info(
-            f"Initialized Semantic Scholar service (max_results={self.max_results})"
-        )
+        self.logger.info(f"Initialized Semantic Scholar service (max_results={self.max_results})")
 
     async def search(self, query: str, max_results: int = 10) -> list[Paper]:
         """Search for papers on Semantic Scholar.
@@ -60,9 +58,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
             ServiceException: If search fails
         """
         try:
-            self.logger.info(
-                f"Searching Semantic Scholar for: '{query}' (max={max_results})"
-            )
+            self.logger.info(f"Searching Semantic Scholar for: '{query}' (max={max_results})")
 
             # Search papers
             results = self.client.search_paper(query, limit=max_results)
@@ -77,9 +73,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
             return papers
 
         except Exception as e:
-            self._handle_error(
-                e, f"Semantic Scholar search failed for query: '{query}'"
-            )
+            self._handle_error(e, f"Semantic Scholar search failed for query: '{query}'")
             return []  # For type checking
 
     def get_service_name(self) -> str:

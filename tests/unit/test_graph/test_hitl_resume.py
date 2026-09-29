@@ -37,9 +37,7 @@ async def test_resume_after_approval_continues_from_checkpoint():
     config = {"configurable": {"thread_id": "hitl-resume-test"}}
 
     state = None
-    async for state in app.astream(
-        {"approved": False}, config, stream_mode="values"
-    ):
+    async for state in app.astream({"approved": False}, config, stream_mode="values"):
         pass
 
     assert state is not None

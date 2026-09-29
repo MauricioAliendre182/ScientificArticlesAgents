@@ -1,6 +1,5 @@
 """Pydantic models for article reviews."""
 
-
 from pydantic import BaseModel, Field
 
 
@@ -32,15 +31,11 @@ class ReviewResult(BaseModel):
         strengths: Identified strengths of the article
     """
 
-    criteria_scores: list[ReviewCriteria] = Field(
-        ..., description="Scores for each criterion"
-    )
+    criteria_scores: list[ReviewCriteria] = Field(..., description="Scores for each criterion")
     overall_score: float = Field(..., ge=1.0, le=10.0, description="Overall average score")
     passed: bool = Field(..., description="Whether quality threshold was met")
     summary: str = Field(..., description="Overall review summary")
-    suggestions: list[str] = Field(
-        default_factory=list, description="Suggestions for improvement"
-    )
+    suggestions: list[str] = Field(default_factory=list, description="Suggestions for improvement")
     strengths: list[str] = Field(default_factory=list, description="Article strengths")
 
     class Config:

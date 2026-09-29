@@ -151,23 +151,6 @@ ruff check src/
 mypy src/
 ```
 
-### Project Structure
-
-```
-scientific_articles_engine/
-├── src/scientific_articles_engine/
-│   ├── core/           # Abstractions & protocols
-│   ├── agents/         # Agent implementations
-│   ├── services/       # External integrations
-│   ├── graph/          # LangGraph workflow
-│   ├── models/         # Pydantic models
-│   ├── utils/          # Utilities
-│   └── main.py         # CLI entry point
-├── tests/              # Test suite
-├── docs/               # Documentation
-└── config.yaml         # Configuration
-```
-
 ## SOLID Principles
 
 This project follows SOLID principles:

@@ -97,9 +97,7 @@ class LLMService(BaseService, LLMServiceProtocol):
             self._handle_error(e, "Text generation failed")
             return ""  # For type checking; exception is always raised
 
-    async def generate_with_structure(
-        self, prompt: str, schema: dict, **kwargs: dict
-    ) -> dict:
+    async def generate_with_structure(self, prompt: str, schema: dict, **kwargs: dict) -> dict:
         """Generate structured output conforming to a schema.
 
         Uses function calling / structured output features of the LLM.
@@ -144,9 +142,7 @@ Return ONLY the JSON object, no additional text."""
             self._handle_error(e, "Structured generation failed")
             return {}  # For type checking
 
-    async def generate_with_system_message(
-        self, system: str, prompt: str, **kwargs: dict
-    ) -> str:
+    async def generate_with_system_message(self, system: str, prompt: str, **kwargs: dict) -> str:
         """Generate text with a system message.
 
         Args:

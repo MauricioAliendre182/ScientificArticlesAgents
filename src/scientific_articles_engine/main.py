@@ -78,11 +78,13 @@ async def _generate_article(
         config_path = ctx.obj["config_path"]
         config = load_config(config_path)
 
-        console.print(Panel.fit(
-            f"[bold cyan]Scientific Articles Engine[/bold cyan]\n"
-            f"Topic: [yellow]{topic}[/yellow]",
-            title="Starting Generation",
-        ))
+        console.print(
+            Panel.fit(
+                f"[bold cyan]Scientific Articles Engine[/bold cyan]\n"
+                f"Topic: [yellow]{topic}[/yellow]",
+                title="Starting Generation",
+            )
+        )
 
         # Create workflow
         with Progress(
@@ -106,9 +108,7 @@ async def _generate_article(
         # the search and outline phase. astream asynchronously iterates over
         # those states; the first parameter is the initial state, and the
         # second parameter is the workflow configuration.
-        async for s in workflow.astream(
-            initial_state, workflow_config, stream_mode="values"
-        ):
+        async for s in workflow.astream(initial_state, workflow_config, stream_mode="values"):
             state = s
 
         if state is None or state.get("error_message"):
@@ -132,9 +132,7 @@ async def _generate_article(
             return
 
         # Update the checkpointed state, then resume from the HITL pause.
-        workflow_config = await workflow.aupdate_state(
-            workflow_config, {"searcher_approved": True}
-        )
+        workflow_config = await workflow.aupdate_state(workflow_config, {"searcher_approved": True})
 
         # Phase 2: Writing and reviewing
         console.print("\n[bold]Phase 2: Writing and reviewing article[/bold]")
@@ -147,9 +145,7 @@ async def _generate_article(
         ) as progress:
             task = progress.add_task("Writing and reviewing...", total=None)
 
-            async for s in workflow.astream(
-                None, workflow_config, stream_mode="values"
-            ):
+            async for s in workflow.astream(None, workflow_config, stream_mode="values"):
                 state = s
                 if "article" in s and s.get("review"):
                     progress.update(
@@ -163,9 +159,7 @@ async def _generate_article(
         if state is None:
             raise RuntimeError("Writing/review phase produced no workflow state")
         if state.get("error_message"):
-            raise RuntimeError(
-                f"Writing/review phase failed: {state['error_message']}"
-            )
+            raise RuntimeError(f"Writing/review phase failed: {state['error_message']}")
 
         # HITL Point 2: Review final article
         article = state["article"]
@@ -193,14 +187,10 @@ async def _generate_article(
         workflow_config = (await workflow.aget_state(thread_config)).config
 
         # Update the checkpointed state, then resume from the final HITL pause.
-        workflow_config = await workflow.aupdate_state(
-            workflow_config, {"final_approved": True}
-        )
+        workflow_config = await workflow.aupdate_state(workflow_config, {"final_approved": True})
 
         console.print("\n[bold]Phase 3: Generating visualizations[/bold]")
-        async for s in workflow.astream(
-            None, workflow_config, stream_mode="values"
-        ):
+        async for s in workflow.astream(None, workflow_config, stream_mode="values"):
             state = s
 
         # Save article

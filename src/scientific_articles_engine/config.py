@@ -62,9 +62,7 @@ class AgentConfig(BaseModel):
 
     # Visualizer
     max_visualizations: int = Field(5, gt=0)
-    supported_types: list = Field(
-        default_factory=lambda: ["table", "diagram", "flowchart"]
-    )
+    supported_types: list = Field(default_factory=lambda: ["table", "diagram", "flowchart"])
 
 
 class DatabaseConfig(BaseModel):
@@ -121,9 +119,7 @@ class EngineConfig(BaseModel):
             with open(path) as f:
                 config_data = yaml.safe_load(f)
         except Exception as e:
-            raise ConfigurationError(
-                f"Failed to load configuration from {config_path}: {e}"
-            )
+            raise ConfigurationError(f"Failed to load configuration from {config_path}: {e}")
 
         # Inject environment variables
         config_data = cls._inject_env_vars(config_data)

@@ -110,9 +110,7 @@ class ReviewerAgent(BaseAgent[ReviewResult]):
         prompt = self._get_review_prompt(article_text, topic)
 
         # Get structured review from LLM
-        review_data = await self.llm_service.generate_with_structure(
-            prompt, review_schema
-        )
+        review_data = await self.llm_service.generate_with_structure(prompt, review_schema)
 
         # Calculate overall score
         criteria_scores = [

@@ -78,9 +78,7 @@ class WriterAgent(BaseAgent[Article]):
             self._handle_error(e)
             return None  # For type checking
 
-    async def _create_draft(
-        self, topic: str, outline: str, papers: list[Paper]
-    ) -> Article:
+    async def _create_draft(self, topic: str, outline: str, papers: list[Paper]) -> Article:
         """Create a new article draft.
 
         Args:
@@ -122,9 +120,7 @@ class WriterAgent(BaseAgent[Article]):
         feedback = review.get_feedback_for_revision()
 
         # Generate revised article
-        prompt = self._get_revision_prompt(
-            current_article_text, feedback, papers_context
-        )
+        prompt = self._get_revision_prompt(current_article_text, feedback, papers_context)
         revised_text = await self.llm_service.generate(prompt)
 
         # Parse revised article
@@ -155,9 +151,7 @@ class WriterAgent(BaseAgent[Article]):
 
         return "\n".join(context_parts)
 
-    def _get_draft_prompt(
-        self, topic: str, outline: str, papers_context: str
-    ) -> str:
+    def _get_draft_prompt(self, topic: str, outline: str, papers_context: str) -> str:
         """Get prompt for creating initial draft.
 
         Args:
@@ -199,9 +193,7 @@ class WriterAgent(BaseAgent[Article]):
 
                     Write ONLY the article content, no meta-commentary."""
 
-    def _get_revision_prompt(
-        self, current_article: str, feedback: str, papers_context: str
-    ) -> str:
+    def _get_revision_prompt(self, current_article: str, feedback: str, papers_context: str) -> str:
         """Get prompt for revising article.
 
         Args:
@@ -312,9 +304,7 @@ class WriterAgent(BaseAgent[Article]):
 
                 # Start new section
                 title = line.strip().lstrip("#").strip()
-                current_section = ArticleSection(
-                    title=title, content="", subsections=[]
-                )
+                current_section = ArticleSection(title=title, content="", subsections=[])
                 current_content = []
 
             # Skip title line (#) and subsections (###)

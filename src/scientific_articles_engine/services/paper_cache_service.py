@@ -84,11 +84,9 @@ class PaperCacheService:
 
     @staticmethod
     async def _ensure_table(connection: AsyncConnection) -> None:
-        await connection.execute(
-            """CREATE TABLE IF NOT EXISTS paper_search_cache (
+        await connection.execute("""CREATE TABLE IF NOT EXISTS paper_search_cache (
                    query_key TEXT PRIMARY KEY,
                    normalized_query TEXT NOT NULL,
                    papers JSONB NOT NULL,
                    fetched_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-               )"""
-        )
+               )""")

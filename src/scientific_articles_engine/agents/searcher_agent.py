@@ -82,9 +82,7 @@ class SearcherAgent(BaseAgent[tuple[list[Paper], str]]):
             self._handle_error(e)
             return [], ""  # For type checking
 
-    async def _search_all_sources(
-        self, query: str
-    ) -> tuple[list[Paper], list[Paper]]:
+    async def _search_all_sources(self, query: str) -> tuple[list[Paper], list[Paper]]:
         """Search all paper sources in parallel.
 
         Args:
@@ -149,8 +147,7 @@ class SearcherAgent(BaseAgent[tuple[list[Paper], str]]):
         if failures and not live_papers and not cached_papers:
             raise RuntimeError(
                 "Live searches produced no papers and no cached results were available. "
-                "Provider errors: "
-                + "; ".join(failures)
+                "Provider errors: " + "; ".join(failures)
             )
 
         combined_papers = self._deduplicate_papers(live_papers + cached_papers)
@@ -206,9 +203,7 @@ class SearcherAgent(BaseAgent[tuple[list[Paper], str]]):
 
         papers_context = "\n".join(paper_summaries)
 
-        prompt = self.get_prompt_template().format(
-            topic=topic, papers_context=papers_context
-        )
+        prompt = self.get_prompt_template().format(topic=topic, papers_context=papers_context)
 
         outline = await self.llm_service.generate(prompt)
         return outline

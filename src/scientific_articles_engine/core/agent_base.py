@@ -86,9 +86,7 @@ class BaseAgent(ABC, Generic[T]):
         Raises:
             AgentExecutionException: Wrapped exception with agent context
         """
-        raise AgentExecutionError(
-            agent_name=self.agent_name, message=str(error)
-        ) from error
+        raise AgentExecutionError(agent_name=self.agent_name, message=str(error)) from error
 
     def get_config_value(self, key: str, default: Any = None) -> Any:
         """Safely retrieve a configuration value.

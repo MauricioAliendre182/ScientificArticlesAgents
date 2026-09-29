@@ -67,9 +67,7 @@ class VisualizerAgent(BaseAgent[list[Visualization]]):
             self._handle_error(e)
             return []  # For type checking
 
-    async def _generate_visualizations(
-        self, article: Article, topic: str
-    ) -> list[Visualization]:
+    async def _generate_visualizations(self, article: Article, topic: str) -> list[Visualization]:
         """Generate visualizations for an article.
 
         Args:
@@ -92,9 +90,7 @@ class VisualizerAgent(BaseAgent[list[Visualization]]):
         # Generate each visualization
         visualizations = []
         for i, opportunity in enumerate(opportunities[:max_viz], 1):
-            viz = await self._generate_single_visualization(
-                opportunity, article_text, i
-            )
+            viz = await self._generate_single_visualization(opportunity, article_text, i)
             if viz:
                 visualizations.append(viz)
 
@@ -118,9 +114,7 @@ class VisualizerAgent(BaseAgent[list[Visualization]]):
         description = opportunity.get("description", "")
 
         # Generate visualization content
-        prompt = self._get_generation_prompt(
-            viz_type, title, description, article_text
-        )
+        prompt = self._get_generation_prompt(viz_type, title, description, article_text)
         content = await self.llm_service.generate(prompt)
 
         # Determine format based on type

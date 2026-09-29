@@ -75,15 +75,11 @@ def route_after_reviewer(
 
     # Check if we've exceeded max revisions
     if revision_count >= max_revisions:
-        logger.warning(
-            f"Max revisions ({max_revisions}) exceeded → Ending workflow"
-        )
+        logger.warning(f"Max revisions ({max_revisions}) exceeded → Ending workflow")
         return "__end__"
 
     # Need revision and have attempts remaining
-    logger.info(
-        f"Article needs revision (attempt {revision_count + 1}/{max_revisions}) → Writer"
-    )
+    logger.info(f"Article needs revision (attempt {revision_count + 1}/{max_revisions}) → Writer")
     return "writer"
 
 

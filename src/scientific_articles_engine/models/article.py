@@ -1,6 +1,5 @@
 """Pydantic models for generated articles."""
 
-
 from pydantic import BaseModel, Field
 
 

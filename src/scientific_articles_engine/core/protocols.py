@@ -26,9 +26,7 @@ class LLMServiceProtocol(Protocol):
         """
         ...
 
-    async def generate_with_structure(
-        self, prompt: str, schema: dict, **kwargs: dict
-    ) -> dict:
+    async def generate_with_structure(self, prompt: str, schema: dict, **kwargs: dict) -> dict:
         """Generate structured output conforming to a schema.
 
         Args:

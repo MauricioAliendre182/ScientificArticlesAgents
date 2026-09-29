@@ -59,9 +59,7 @@ class AgentFactory:
             }
         )
         self.paper_cache_service = (
-            PaperCacheService(config.database.model_dump())
-            if config.database.enabled
-            else None
+            PaperCacheService(config.database.model_dump()) if config.database.enabled else None
         )
 
     def create_searcher(self) -> Any:

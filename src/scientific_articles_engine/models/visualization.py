@@ -37,12 +37,8 @@ class Visualization(BaseModel):
     type: VisualizationType = Field(..., description="Type of visualization")
     title: str = Field(..., description="Visualization title/caption")
     content: str = Field(..., description="Visualization content/markup")
-    format: str = Field(
-        ..., description="Content format (markdown, mermaid, latex, dot, etc.)"
-    )
-    description: str | None = Field(
-        None, description="Description of the visualization"
-    )
+    format: str = Field(..., description="Content format (markdown, mermaid, latex, dot, etc.)")
+    description: str | None = Field(None, description="Description of the visualization")
 
     class Config:
         """Pydantic model configuration."""
@@ -59,8 +55,7 @@ class Visualization(BaseModel):
                 ),
                 "format": "markdown",
                 "description": (
-                    "Comparison of key transformer models by parameter count "
-                    "and release year"
+                    "Comparison of key transformer models by parameter count " "and release year"
                 ),
             }
         }

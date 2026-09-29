@@ -95,10 +95,7 @@ class ArxivService(BaseService, PaperSearchServiceProtocol):
         Returns:
             Paper object
         """
-        authors = [
-            PaperAuthor(name=author.name, affiliation=None)
-            for author in result.authors
-        ]
+        authors = [PaperAuthor(name=author.name, affiliation=None) for author in result.authors]
 
         return Paper(
             title=result.title,

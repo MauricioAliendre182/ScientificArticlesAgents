@@ -102,9 +102,7 @@ def _build_connection_string_from_env() -> str | None:
     password = os.getenv("DATABASE_PASSWORD")
 
     if not password:
-        logger.warning(
-            "DATABASE_PASSWORD not set, cannot build connection string"
-        )
+        logger.warning("DATABASE_PASSWORD not set, cannot build connection string")
         return None
 
     return f"postgresql://{user}:{password}@{host}:{port}/{database}"

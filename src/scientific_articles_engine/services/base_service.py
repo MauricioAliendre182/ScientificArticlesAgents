@@ -43,9 +43,7 @@ class BaseService(ABC):
         """
         error_msg = f"{context}: {str(error)}" if context else str(error)
         self.logger.error(f"Service error in {self.service_name}: {error_msg}")
-        raise ServiceError(
-            service_name=self.service_name, message=error_msg
-        ) from error
+        raise ServiceError(service_name=self.service_name, message=error_msg) from error
 
     def get_config_value(self, key: str, default: Any = None) -> Any:
         """Safely retrieve a configuration value.

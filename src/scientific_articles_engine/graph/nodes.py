@@ -3,7 +3,6 @@
 Each node function wraps an agent execution and updates the state.
 """
 
-
 from ..agents.reviewer_agent import ReviewerAgent
 from ..agents.searcher_agent import SearcherAgent
 from ..agents.visualizer_agent import VisualizerAgent
@@ -14,9 +13,7 @@ from ..utils.logger import get_logger
 logger = get_logger(__name__)
 
 
-async def searcher_node(
-    state: AgentState, searcher_agent: SearcherAgent
-) -> dict:
+async def searcher_node(state: AgentState, searcher_agent: SearcherAgent) -> dict:
     """Execute the Searcher agent node.
 
     Args:
@@ -41,9 +38,7 @@ async def searcher_node(
         return {"error_message": str(e)}
 
 
-async def writer_node(
-    state: AgentState, writer_agent: WriterAgent
-) -> dict:
+async def writer_node(state: AgentState, writer_agent: WriterAgent) -> dict:
     """Execute the Writer agent node.
 
     Args:
@@ -69,9 +64,7 @@ async def writer_node(
         return {"error_message": str(e)}
 
 
-async def reviewer_node(
-    state: AgentState, reviewer_agent: ReviewerAgent
-) -> dict:
+async def reviewer_node(state: AgentState, reviewer_agent: ReviewerAgent) -> dict:
     """Execute the Reviewer agent node.
 
     Args:
@@ -100,9 +93,7 @@ async def reviewer_node(
         return {"error_message": str(e)}
 
 
-async def visualizer_node(
-    state: AgentState, visualizer_agent: VisualizerAgent
-) -> dict:
+async def visualizer_node(state: AgentState, visualizer_agent: VisualizerAgent) -> dict:
     """Execute the Visualizer agent node.
 
     Args:
