@@ -46,9 +46,11 @@ class Paper(BaseModel):
     citations_count: int | None = Field(None, description="Number of citations")
     venue: str | None = Field(None, description="Publication venue")
 
-    # Define Config class for Pydantic model settings
-    # It is to provide additional configuration for the Pydantic model, such as example data for JSON schema.
-    # For example: Paper.Config.json_schema_extra provides example data for the JSON schema.
+    # Define Config class for Pydantic model settings.
+    # It is to provide additional configuration for the Pydantic model, such
+    # as example data for JSON schema.
+    # For example: Paper.Config.json_schema_extra provides example data for
+    # the JSON schema.
     class Config:
         """Pydantic model configuration."""
 

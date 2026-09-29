@@ -4,7 +4,7 @@ This module implements the Dependency Inversion Principle (DIP) by providing
 a factory that creates agents with their required dependencies.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 from ..config import EngineConfig
 from .arxiv_service import ArxivService

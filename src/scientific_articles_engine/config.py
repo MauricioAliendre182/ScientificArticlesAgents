@@ -8,7 +8,7 @@ import yaml
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
-from .core.exceptions import ConfigurationException
+from .core.exceptions import ConfigurationError
 
 # Load environment variables from .env file
 load_dotenv()
@@ -115,13 +115,13 @@ class EngineConfig(BaseModel):
         """
         path = Path(config_path)
         if not path.exists():
-            raise ConfigurationException(f"Configuration file not found: {config_path}")
+            raise ConfigurationError(f"Configuration file not found: {config_path}")
 
         try:
             with open(path) as f:
                 config_data = yaml.safe_load(f)
         except Exception as e:
-            raise ConfigurationException(
+            raise ConfigurationError(
                 f"Failed to load configuration from {config_path}: {e}"
             )
 
@@ -131,7 +131,7 @@ class EngineConfig(BaseModel):
         try:
             return cls(**config_data)
         except Exception as e:
-            raise ConfigurationException(f"Invalid configuration: {e}")
+            raise ConfigurationError(f"Invalid configuration: {e}")
 
     @staticmethod
     def _inject_env_vars(config_data: dict[str, Any]) -> dict[str, Any]:

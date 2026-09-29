@@ -9,7 +9,8 @@ from typing import Protocol
 from ..models.paper import Paper
 
 
-# Protocol: it is an interface that defines a set of methods a service must implement without providing the implementation itself.
+# Protocol: it is an interface that defines a set of methods a service must
+# implement without providing the implementation itself.
 class LLMServiceProtocol(Protocol):
     """Protocol for Language Model service interactions."""
 

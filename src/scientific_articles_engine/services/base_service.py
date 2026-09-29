@@ -3,11 +3,12 @@
 from abc import ABC
 from typing import Any
 
-from ..core.exceptions import ServiceException
+from ..core.exceptions import ServiceError
 from ..utils.logger import get_logger
 
 
-# ABC is to define an abstract base class that cannot be instantiated directly and is meant to be subclassed by concrete service implementations.
+# ABC is to define an abstract base class that cannot be instantiated
+# directly and is meant to be subclassed by concrete service implementations.
 class BaseService(ABC):
     """Abstract base class for all services.
 
@@ -42,7 +43,7 @@ class BaseService(ABC):
         """
         error_msg = f"{context}: {str(error)}" if context else str(error)
         self.logger.error(f"Service error in {self.service_name}: {error_msg}")
-        raise ServiceException(
+        raise ServiceError(
             service_name=self.service_name, message=error_msg
         ) from error
 

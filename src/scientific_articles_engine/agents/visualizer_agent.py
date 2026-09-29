@@ -191,7 +191,8 @@ class VisualizerAgent(BaseAgent[list[Visualization]]):
                 **Article**:
                 {article_text}
 
-                Identify up to {max_viz} visualizations that would enhance the article. For each, specify:
+                Identify up to {max_viz} visualizations that would enhance the article.
+                For each, specify:
                 - Type: One of {', '.join(supported_types)}
                 - Title: Descriptive title for the visualization
                 - Description: Brief description of what it should show

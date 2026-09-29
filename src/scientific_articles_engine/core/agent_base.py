@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Generic, TypeVar
 
 from ..utils.logger import get_logger
-from .exceptions import AgentExecutionException
+from .exceptions import AgentExecutionError
 from .protocols import LLMServiceProtocol
 from .state import AgentState
 
@@ -86,7 +86,7 @@ class BaseAgent(ABC, Generic[T]):
         Raises:
             AgentExecutionException: Wrapped exception with agent context
         """
-        raise AgentExecutionException(
+        raise AgentExecutionError(
             agent_name=self.agent_name, message=str(error)
         ) from error
 

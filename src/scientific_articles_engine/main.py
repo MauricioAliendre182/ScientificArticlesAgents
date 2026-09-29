@@ -101,10 +101,11 @@ async def _generate_article(
         # Phase 1: Search and outline
         console.print("\n[bold]Phase 1: Searching papers and generating outline[/bold]")
         state = None
-        # Execute the search and outline phase asynchronously
-        # The workflow will yield intermediate states as it progresses through the search and outline phase.
-        # astream is used to asynchronously iterate over the workflow's states as it progresses through the search and outline phase.
-        # the first parameter is the initial state, and the second parameter is the workflow configuration.
+        # Execute the search and outline phase asynchronously.
+        # The workflow yields intermediate states as it progresses through
+        # the search and outline phase. astream asynchronously iterates over
+        # those states; the first parameter is the initial state, and the
+        # second parameter is the workflow configuration.
         async for s in workflow.astream(
             initial_state, workflow_config, stream_mode="values"
         ):

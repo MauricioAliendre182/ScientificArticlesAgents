@@ -152,22 +152,28 @@ class ReviewerAgent(BaseAgent[ReviewResult]):
                     **Article to Review**:
                     {article_text}
 
-                    Evaluate this article across four criteria, providing a score (1-10) and detailed feedback for each:
+                    Evaluate this article across four criteria, providing a score (1-10)
+                    and detailed feedback for each:
 
-                    1. **Scientific Rigor**: Is the content accurate, thorough, and well-researched? Are claims properly supported?
+                    1. **Scientific Rigor**: Is the content accurate, thorough, and
+                    well-researched? Are claims properly supported?
 
-                    2. **Citation Quality**: Are sources appropriate, recent, and comprehensive? Are all claims properly cited?
+                    2. **Citation Quality**: Are sources appropriate, recent, and
+                    comprehensive? Are all claims properly cited?
 
-                    3. **Coherence**: Does the article flow logically? Are sections well-organized and transitions smooth?
+                    3. **Coherence**: Does the article flow logically? Are sections
+                    well-organized and transitions smooth?
 
-                    4. **Writing Quality**: Is the writing clear, professional, and free of errors? Is the style appropriate for a scientific audience?
+                    4. **Writing Quality**: Is the writing clear, professional, and free
+                    of errors? Is the style appropriate for a scientific audience?
 
                     Also provide:
                     - An overall summary of the article's quality
                     - Specific suggestions for improvement (3-5 items)
                     - Key strengths of the article (2-3 items)
 
-                    The quality threshold for passing is {threshold}/10. Be constructive but rigorous in your evaluation."""
+                    The quality threshold for passing is {threshold}/10. Be constructive
+                    but rigorous in your evaluation."""
 
     def get_prompt_template(self) -> str:
         """Get the prompt template.

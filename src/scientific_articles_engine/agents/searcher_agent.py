@@ -219,21 +219,24 @@ class SearcherAgent(BaseAgent[tuple[list[Paper], str]]):
         Returns:
             Prompt template string
         """
-        return """You are a scientific writing expert tasked with creating an outline for a comprehensive article.
+        return """You are a scientific writing expert tasked with creating an outline
+                for a comprehensive article.
 
                 **Topic**: {topic}
 
                 **Available Papers**:
                 {papers_context}
 
-                Based on the papers found, create a detailed outline for a scientific article on this topic. The outline should:
+                Based on the papers found, create a detailed outline for a scientific
+                article on this topic. The outline should:
                 1. Have a clear Introduction section
                 2. Include a Background/Literature Review section
                 3. Organize main content into 2-4 thematic sections
                 4. Have a Discussion section
                 5. End with a Conclusion section
 
-                Format the outline with clear section headings and bullet points for key points to cover.
+                Format the outline with clear section headings and bullet points for
+                key points to cover.
                 Each section should reference which papers will be used (by number).
 
                 Provide ONLY the outline, no additional commentary."""

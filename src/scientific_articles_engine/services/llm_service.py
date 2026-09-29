@@ -7,7 +7,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
-from ..core.exceptions import ServiceException
+from ..core.exceptions import ServiceError
 from ..core.protocols import LLMServiceProtocol
 from .base_service import BaseService
 
@@ -45,7 +45,7 @@ class LLMService(BaseService, LLMServiceProtocol):
         self.api_key = config.get("api_key")
 
         if not self.api_key:
-            raise ServiceException(
+            raise ServiceError(
                 service_name=self.service_name,
                 message=f"API key not provided for {self.provider}",
             )
@@ -67,7 +67,7 @@ class LLMService(BaseService, LLMServiceProtocol):
                     max_tokens=config.get("max_tokens", 4000),
                 )
             else:
-                raise ServiceException(
+                raise ServiceError(
                     service_name=self.service_name,
                     message=f"Unsupported provider: {self.provider}",
                 )

@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from src.scientific_articles_engine.agents.searcher_agent import SearcherAgent
-from src.scientific_articles_engine.core.exceptions import AgentExecutionException
+from src.scientific_articles_engine.core.exceptions import AgentExecutionError
 
 
 @pytest.mark.asyncio
@@ -60,7 +60,7 @@ async def test_searcher_fails_clearly_when_both_sources_fail(
         config={"max_papers_per_source": 5},
     )
 
-    with pytest.raises(AgentExecutionException) as error:
+    with pytest.raises(AgentExecutionError) as error:
         await agent.execute({"topic": "Transformer architectures"})
 
     assert "Live searches produced no papers" in str(error.value)

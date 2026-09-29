@@ -123,7 +123,7 @@ class SemanticScholarService(BaseService, PaperSearchServiceProtocol):
             if hasattr(result, "year") and result.year:
                 try:
                     pub_date = datetime(result.year, 1, 1)
-                except:
+                except (ValueError, TypeError):
                     pass
 
             # Get PDF URL if available

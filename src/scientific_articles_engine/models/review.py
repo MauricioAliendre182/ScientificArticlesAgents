@@ -62,7 +62,7 @@ class ReviewResult(BaseModel):
                     {
                         "criterion": "Coherence",
                         "score": 9,
-                        "feedback": "The article flows logically from introduction to conclusion...",
+                        "feedback": "The article flows logically from introduction to conclusion...",  # noqa: E501
                     },
                     {
                         "criterion": "Writing Quality",

@@ -51,9 +51,17 @@ class Visualization(BaseModel):
             "example": {
                 "type": "table",
                 "title": "Comparison of Transformer Architectures",
-                "content": "| Model | Parameters | Year |\n|-------|------------|------|\n| BERT | 340M | 2018 |\n| GPT-3 | 175B | 2020 |",
+                "content": (
+                    "| Model | Parameters | Year |\n"
+                    "|-------|------------|------|\n"
+                    "| BERT | 340M | 2018 |\n"
+                    "| GPT-3 | 175B | 2020 |"
+                ),
                 "format": "markdown",
-                "description": "Comparison of key transformer models by parameter count and release year",
+                "description": (
+                    "Comparison of key transformer models by parameter count "
+                    "and release year"
+                ),
             }
         }
 

@@ -79,7 +79,10 @@ def sample_papers():
                 PaperAuthor(name="Ashish Vaswani", affiliation="Google Brain"),
                 PaperAuthor(name="Noam Shazeer", affiliation="Google Brain"),
             ],
-            abstract="The dominant sequence transduction models are based on complex recurrent or convolutional neural networks.",
+            abstract=(
+                "The dominant sequence transduction models are based on complex "
+                "recurrent or convolutional neural networks."
+            ),
             url="https://arxiv.org/abs/1706.03762",
             pdf_url="https://arxiv.org/pdf/1706.03762.pdf",
             published_date=None,

@@ -17,9 +17,12 @@ from ..utils.logger import get_logger
 logger = get_logger(__name__)
 # This serializer is used for serializing and deserializing checkpoint data.
 # It uses JsonPlusSerializer with pickle fallback enabled.
-# pickle fallback: it is to ensure that objects not natively supported by JsonPlus can still be serialized using Python's pickle mechanism.
-# For postgresql checkpointing, this serializer will be used to serialize and deserialize the checkpoint data.
-# IMPORTANT: pickle fallback is appropriate only while the checkpoint database contains trusted data.
+# pickle fallback: it is to ensure that objects not natively supported by
+# JsonPlus can still be serialized using Python's pickle mechanism.
+# For postgresql checkpointing, this serializer will be used to serialize
+# and deserialize the checkpoint data.
+# IMPORTANT: pickle fallback is appropriate only while the checkpoint
+# database contains trusted data.
 # Don’t load checkpoints that an untrusted party could modify.
 checkpoint_serializer = JsonPlusSerializer(
     pickle_fallback=True,

@@ -2,20 +2,20 @@
 
 from .agent_base import BaseAgent
 from .exceptions import (
-    AgentExecutionException,
-    EngineException,
-    ServiceException,
-    ValidationException,
+    AgentExecutionError,
+    EngineError,
+    ServiceError,
+    ValidationError,
 )
 from .protocols import LLMServiceProtocol, PaperSearchServiceProtocol
 from .state import AgentState
 
 __all__ = [
     "BaseAgent",
-    "EngineException",
-    "AgentExecutionException",
-    "ServiceException",
-    "ValidationException",
+    "EngineError",
+    "AgentExecutionError",
+    "ServiceError",
+    "ValidationError",
     "LLMServiceProtocol",
     "PaperSearchServiceProtocol",
     "AgentState",
